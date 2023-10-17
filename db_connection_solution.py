@@ -13,6 +13,7 @@
 # --> add your Python code here
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import re
 
 def connectDataBase():
 
@@ -45,10 +46,20 @@ def createDocument(cur, docId, docText, docTitle, docDate, docCat):
 
     # 1 Get the category id based on the informed category name
     # --> add your Python code here
-
+    cur.execute("SELECT cat_id FROM category WHERE name = %s", (docCat,))
+    result = cur.fetchone()
+    if result is not None:
+        catId = result['cat_id']
+    else:
+        print(f"Category '{docCat}' does not exist.")
+        return
     # 2 Insert the document in the database. For num_chars, discard the spaces and punctuation marks.
     # --> add your Python code here
-
+    docText_cleaned = re.sub(r'[^\w]', '', docText)
+    numChar = len(docText_cleaned)
+    sql = "Insert into document(doc_id, text, title, num_chars, date, cat_id) Values (%s, %s, %s, %s, %s, %s)"
+    recset = [docId, docText, docTitle, numChar, docDate, catId]
+    cur.execute(sql, recset)
     # 3 Update the potential new terms.
     # 3.1 Find all terms that belong to the document. Use space " " as the delimiter character for terms and Remember to lowercase terms and remove punctuation marks.
     # 3.2 For each term identified, check if the term already exists in the database
