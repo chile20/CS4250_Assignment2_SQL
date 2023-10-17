@@ -35,9 +35,11 @@ def connectDataBase():
         print("Database not connected successfully")
 
 def createCategory(cur, catId, catName):
-
     # Insert a category in the database
     # --> add your Python code here
+    sql = "Insert into category (cat_id, name) Values (%s, %s)"
+    recset = [catId, catName]
+    cur.execute(sql, recset)
     print("Category created.")
 def createDocument(cur, docId, docText, docTitle, docDate, docCat):
 
