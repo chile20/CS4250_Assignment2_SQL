@@ -155,3 +155,28 @@ def getIndex(cur):
     # {'baseball':'Exercise:1','summer':'Exercise:1,California:1,Arizona:1','months':'Exercise:1,Discovery:3'}
     # ...
     # --> add your Python code here
+    termList = {}
+
+    # Retrieve all terms
+    cur.execute("SELECT term FROM term")
+    terms = cur.fetchall()
+
+    for term_row in terms:
+        term = term_row['term']
+
+        # Retrieve documents where the term occurs with their counts
+        cur.execute("""
+                SELECT d.title, COUNT(i.doc_id) AS count
+                FROM document d
+                JOIN index i ON d.doc_id = i.doc_id
+                WHERE i.term = %s
+                GROUP BY d.title
+            """, (term,))
+        term_documents = cur.fetchall()
+
+        # Create a dictionary of document counts for the term
+        docCount = {row['title']: row['count'] for row in term_documents}
+
+        termList[term] = docCount
+
+    return termList
