@@ -1,9 +1,10 @@
 #-------------------------------------------------------------------------
 # AUTHOR: your name
 # FILENAME: title of the source file
-# SPECIFICATION: description of the program
-# FOR: CS 4250- Assignment #1
-# TIME SPENT: 60min
+# SPECIFICATION: This program provides functions to interact with a PostgreSQL database for document and category management.
+# It includes functionalities to create, delete, update documents, and retrieve term-document associations.
+# FOR: CS 4250- Assignment #2
+# TIME SPENT: 3h
 #-----------------------------------------------------------*/
 
 #IMPORTANT NOTE: DO NOT USE ANY ADVANCED PYTHON LIBRARY TO COMPLETE THIS CODE SUCH AS numpy OR pandas. You have to work here only with
