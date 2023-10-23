@@ -21,7 +21,7 @@ def connectDataBase():
 
     # Create a database connection object using psycopg2
     # --> add your Python code here
-    DB_NAME = "CPP"
+    DB_NAME = "corpus"
     DB_USER = "postgres"
     DB_PASS = "123"
     DB_HOST = "localhost"
