@@ -1,7 +1,7 @@
 # Homework Repository for CS 4250
 
 **Author**: Chi Le
-**Assignment**: Assignment #2
+**Assignment**: Assignment #2 with SQL
 
 ## Program: index.py
 
