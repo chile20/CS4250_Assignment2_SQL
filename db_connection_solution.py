@@ -167,7 +167,7 @@ def getIndex(cur):
 
         # Retrieve documents where the term occurs with their counts
         cur.execute("""
-                SELECT d.title, COUNT(i.doc_id) AS count
+                SELECT d.title, SUM(i.count) as count
                 FROM document d
                 JOIN index i ON d.doc_id = i.doc_id
                 WHERE i.term = %s
