@@ -159,7 +159,7 @@ def getIndex(cur):
     termList = {}
 
     # Retrieve all terms
-    cur.execute("SELECT term FROM term")
+    cur.execute("SELECT term FROM term ORDER BY term ASC")
     terms = cur.fetchall()
 
     for term_row in terms:
@@ -176,8 +176,8 @@ def getIndex(cur):
         term_documents = cur.fetchall()
 
         # Create a dictionary of document counts for the term
-        docCount = {row['title']: row['count'] for row in term_documents}
-
+        docCountItems = [f"{row['title']}:{row['count']}" for row in term_documents]
+        docCount = ", ".join(docCountItems)
         termList[term] = docCount
 
     return termList
